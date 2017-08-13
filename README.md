@@ -63,4 +63,5 @@ sr_i(R)-sr_i(L)
 
 where i is the cell index; then normalize to produce a unit vector
 * Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD
-* Extra dPCA — download code from Machens website
+* Extra dPCA: download code from Machens website
+* https://github.com/machenslab/dPCA
