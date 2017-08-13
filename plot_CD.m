@@ -1,4 +1,4 @@
-% plot fano factor 
+% plot coding direction
 % 
 % This code will go through coding direction plot for a selected single
 % session for two behavioral conditions.
