@@ -3,6 +3,11 @@ This is repo for the hand-on lecture on 08/21.
 
 ## Dataset Description
 ### Task description:
+* Tactile delayed response task
+* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right).
+* The sample epoch was followed by a "delay epoch", while the animal was trained not to move.
+* At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
+
 
 ### Task structure:
 * Pre-sample: -3.1 to -2.6 sec.
@@ -11,8 +16,8 @@ This is repo for the hand-on lecture on 08/21.
 * Response: 0 - 2 sec.
 
 ### Data structure:
-* sessionIndex : index of the session which neuron is recorded. Each session is recorded by JRC multi-electrode (64 multiplex-units).
-* nUnit: index of the neuron/unit in each recording session.
+* sessionIndex : index of the session which neuron is recorded. Each session is recorded by JRC multi-electrode arrays (64 multiplex-units).
+* nUnit: index of the neuron(unit) in each recording session.
 * unit_yes_trial: correct right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
 * unit_no_trial: correct left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
 * unit_yes_trial_index: trial index for each correct right-lick trial.
