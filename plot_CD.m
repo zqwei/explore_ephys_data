@@ -18,6 +18,10 @@ numTime = length(timeTag);
 
 %% coding direction
 
+% coding direction is defined as a vector spanned by neurons;
+% each element is the difference of the mean activity of neurons in two
+% trial type conditions.
+
 cdMat    = zeros(numUnit, numTime);
 meanMatR = zeros(numUnit, numTime);
 meanMatL = zeros(numUnit, numTime);
@@ -30,6 +34,8 @@ for cellId = 1:numUnit
     meanMatL(cellId, :) = meanL;
 end
 
+% We now explore the similarity of coding direction across time using corr
+% function in matlab.
 figure;
 title(['Coding direction correlation across time for Session #' num2str(sessionId)])
 hold on
@@ -43,10 +49,17 @@ hold off
 
 
 %% projection of data to delay-epoch coding direction 
+
+% delay-epoch coding direction is defined as an average of coding direction
+% over whole delay period -1.3 to 0 sec in time tag.
+
 cdDelay = mean(cdMat(:, timeTag > -1.3 & timeTag < 0), 2);
 cdDelay = cdDelay/norm(cdDelay);
 popR    = meanMatR' * cdDelay;
 popL    = meanMatL' * cdDelay;
+
+% We now project the neuronal activity in different trial type conditions
+% to the coding direction.
 
 figure;
 title(['Coding direction projection for Session #' num2str(sessionId)])

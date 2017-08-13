@@ -14,6 +14,11 @@ load('ephysDataset.mat')
 
 sampleRate = 14.84;
 
+% fano factor is computed as the variance of spike counts across trial over 
+% its mean across trial
+
+% one would transfer the spike rate in our dataset to spike count by sample
+% rate
 meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
 meanL = mean(ephysDataset(cellId).unit_no_trial,1)/sampleRate;
 varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
