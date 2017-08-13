@@ -21,6 +21,7 @@ plot_PSTH_with_selectivity
 
 %% 
 % 4.1 Fano factors
+plot_ff
 
 %%
 % 5. Error trial
