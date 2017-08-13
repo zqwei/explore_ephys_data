@@ -4,33 +4,25 @@ This is repo for the hand-on lecture on 08/21.
 ## Dataset Description
 Declear 
 
-## Analyses tasks
+## Cell-based analyses
+### Plot rasters; each spike a dot; trials arrayed in the vertical dimension, time in the horizontal dimension
+### Estimate mean spike rate (try different averaging windows)
+### Plot mean spike rate for different trial types
+###    Extra - test for stationarity of sr across time in the session
+### Compute selectivity as sr(R) - sr(L); do statistical test (bootstrapping or ranksum)
+###    Extra - Fano Factors
+###    Extra - does Fano Factor increase or decrease during the delay epoch? Compare Sample epoch, Early Delay and Late Delay
+### Error trial analysis — is activity similar or different? 
 
-Cell-based analysis
-Plot rasters
-Estimate mean spike rate (averaging window)
-Plot mean spike rate for different trial types
-    Extra credit - test for stationarity across the session
-Compute selectivity as Sr(R) - Sr(L); do statistical test (bootstrapping or ranksum)
-    Extra credit - Fano Factors
-    Extra credit - does Fano Fat tor increase or decrease during the delay epoch?
-Error trial analysis — preparatory activity vs working memory
+## Session-based analysis (i.e. across neurons recorded simulatenously in a session)
+### Grand average, sr
+### Grand average, sr(L), sr(R) - correct trials only
+### Grand average, abs(sr(R) - sr(L))
 
-
-### Plot rasters
-### Plots mean spike rates – for different trial types
-### Find task-modulated neurons
-### Test if spike rates change across trial epochs
-### Test if variance increases during the delay epoch
-### Compute Fano Factors
-### Average spike rates across sessions
-### Dimensionality reduction method
-
-#### compute CD
-
-#### mode with max variance that is orthogonal to CD
-
-
-### dPCA
-
+## Dimensionality reduction
+### Find the coding direction - CD; this is the direction in activity space where trial types can best be discriminated
+### We will use the simplest definition:
+### Sr_i(R)-Sr_i(L), where i is the cell index; then normalize to produce a unit vector
+### Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD
+###     Extra dPCA — download code from Machens website 
 
