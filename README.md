@@ -39,7 +39,8 @@ This is repo for the hand-on lecture on 08/21.
 ### Plot rasters
 * each spike a dot
 * trials arrayed in the vertical dimension, time in the horizontal dimension
-### Estimate mean spike rate (try different averaging windows)
+### Estimate mean spike rate
+* try different averaging windows
 ### Plot mean spike rate for different trial types
 * Extra - test for stationarity of sr across time in the session
 ### Compute selectivity as sr(R) - sr(L); do statistical test (bootstrapping or ranksum)
