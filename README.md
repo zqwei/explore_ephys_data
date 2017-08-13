@@ -16,7 +16,7 @@ This is repo for the hand-on lecture on 08/21.
 * Response: 0 - 2 sec.
 
 ### Data structure:
-* sessionIndex : index of the session which neuron is recorded. Each session is recorded by JRC multi-electrode arrays (64 multiplex-units).
+* sessionIndex : index of the session which neuron is recorded. Each session is recorded by JRC multi-electrode arrays (64 channels).
 * nUnit: index of the neuron(unit) in each recording session.
 * unit_yes_trial: correct right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
 * unit_no_trial: correct left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
