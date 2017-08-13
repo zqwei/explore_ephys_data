@@ -1,0 +1,27 @@
+function [ PSTH ] = func_plot_PSTH (timeTag,hist_R, hist_L)
+% Plot PSTH of individual cell
+% 
+% Input
+% timeTag: time axis
+% hist_R: spike histrogram in lick R trials
+% hist_L: spike histrogram in lick L trials 
+%
+% Output
+% PSTH: PSTH of lick R trials (1st row) and lick L trials  (2nd row)
+
+    %% Calculate the mean spike rate
+    mean_SR_R = mean(hist_R,1);
+    mean_SR_L = mean(hist_L,1);
+
+    %% plot the PSTH
+    figure
+    hold on
+    plot(timeTag,mean_SR_R,'b')
+    plot(timeTag,mean_SR_L,'r')
+    xlabel('Time (s)')
+    ylabel('Spikes per s')
+    hold off
+
+
+end
+
