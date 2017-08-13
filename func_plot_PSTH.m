@@ -1,9 +1,16 @@
 function [ PSTH ] = func_plot_PSTH (cellId,timeTag,ephysDataset)
 % Plot PSTH of individual cell
-% 
+%
+% This code will plot PSTH of individual cell.
+%
 % Input
-% timeTag : time axis
 % cellId  : ID of neuron
+% timeTag : time axis
+% ephysDataset: ephys data
+%
+% Plot
+% blue: lick right
+% red: lick left
 %
 % Output
 % PSTH: PSTH of lick R trials (1st row) and lick L trials  (2nd row)
@@ -18,6 +25,8 @@ function [ PSTH ] = func_plot_PSTH (cellId,timeTag,ephysDataset)
     hold on
     plot(timeTag,meanR,'b')
     plot(timeTag,meanL,'r')
+    gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
+    xlim([-3.1  2]);
     xlabel('Time (s)')
     ylabel('Spikes per s')
     hold off
