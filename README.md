@@ -32,6 +32,7 @@ This is repo for the hand-on lecture on 08/21.
 * unit_no_error_spk_time: spike times for each neuron/unit in an error left-lick trial (unit in sec).
 * depth_in_um: recording depth of the unit in um.
 * cell_type: putative pyramidal cells -- 1; fast-spiking interneurons: 0.
+* timetag: timing information using for all data points binned by 67 ms discrete time bins.
 
 
 ## Cell-based analyses
