@@ -41,7 +41,7 @@ end
 
 gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
 hold on
-xlim([-3.1  2]);
+xlim([-3.0  1.5]);
 ylim([0.5 numTrial+0.5]);
 xlabel('Time from movement (sec)')
 ylabel('Trial index')

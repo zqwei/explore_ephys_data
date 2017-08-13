@@ -26,7 +26,7 @@ hold on
 plot(timeTag, FF_R,'b')
 plot(timeTag, FF_L,'r')
 gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
-xlim([-3.1  2]);
+xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
 ylabel('Fano factor')
 hold off
