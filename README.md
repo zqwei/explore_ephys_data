@@ -13,11 +13,13 @@ Declear
 ###    Extra - Fano Factors
 ###    Extra - does Fano Factor increase or decrease during the delay epoch? Compare Sample epoch, Early Delay and Late Delay
 ### Error trial analysis — is activity similar or different? 
+###
 
 ## Session-based analysis (i.e. across neurons recorded simulatenously in a session)
 ### Grand average, sr
 ### Grand average, sr(L), sr(R) - correct trials only
 ### Grand average, abs(sr(R) - sr(L))
+###
 
 ## Dimensionality reduction
 ### Find the coding direction - CD; this is the direction in activity space where trial types can best be discriminated
