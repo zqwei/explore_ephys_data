@@ -10,8 +10,10 @@
 % Ziqiang Wei
 % weiz@janelia.hhmi.org
 
+load('ephysDataset.mat')
+
 % cell number (ranged from 1 to length of datasets)
-cellId = 10;
+cellId = 1;
 
 unit_yes_trial_spk_time = ephysDataset(cellId).unit_yes_trial_spk_time;
 
@@ -38,4 +40,6 @@ for ntrial = 1:length(unit_yes_trial_spk_time)
 end
 
 gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
-
+hold on
+xlim([-3.1  2]);
+ylim([0.5 numTrial+0.5]);
