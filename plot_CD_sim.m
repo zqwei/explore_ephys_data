@@ -56,6 +56,9 @@ preL = mean(sessionData.unit_no_trial(:,:,timeTag<sample_start),3);
 baseline_matrix = [preR;preL];
 rdMat = nan(numUnit,numTime);
 
+% number of mode
+n = 1;
+
 for t = 1:numTime
     data = [ squeeze(sessionData.unit_yes_trial(:,:,t)); squeeze(sessionData.unit_no_trial(:,:,t))];
     data = data-baseline_matrix;
