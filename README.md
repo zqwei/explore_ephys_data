@@ -95,7 +95,7 @@ plot(spkTime, ones(size(spkTime)), '.');
 plot_raster
 ```
 ![Raster](images/plot_raster.png)
-### Estimate mean spike rate
+### Estimate mean spike rate for different trial types
 * In this task, we plot first cell in __ephysDataset__ using precomputed psth
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
@@ -103,9 +103,8 @@ nTrial = 2; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial_spk_time(nTrial,:);
 plot(timeTag, psth);
 ```
-* try different averaging windows
+* Extra - try different averaging windows
 
-### Plot mean spike rate for different trial types
 * In this task, we plot it for first cell in __ephysDataset__ array using _mean_ function in correct trials
 ```matlab
 cellId = 1; % cell to plot
@@ -121,7 +120,7 @@ xlabel('Time (s)')
 ylabel('Spikes per s')
 hold off
 ```
-
+![PSTH](images/plot_PSTH.png)
 * Extra - test for stationarity of sr across time in the session
 ### Compute selectivity
 * selectivity is defined as sr(R) - sr(L)
@@ -133,6 +132,7 @@ meanR - meanL
 ```matlab
 plot_PSTH_with_selectivity
 ```
+![Selectivity](images/plot_contra_selectivity.png)
 ### Extra - Fano Factors
 ```matlab
 plot_ff

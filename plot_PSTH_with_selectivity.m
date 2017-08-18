@@ -26,6 +26,7 @@ xlim([-3  1.5]); % range of X axis
 xlabel('Time (s)')
 ylabel('Spikes per s')
 hold off
+print('images/plot_PSTH','-dpng')
 
 %% plot the contra selectivity
 figure
@@ -36,4 +37,6 @@ xlim([-3  1.5]); % range of X axis
 xlabel('Time (s)')
 ylabel('Contra selectivity (Spikes per s)')
 hold off
+
+print('images/plot_contra_selectivity','-dpng')
 
