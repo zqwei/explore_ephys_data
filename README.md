@@ -180,8 +180,9 @@ plot_CD_sim
 * Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD using function __func_orthrog_vectors__
 ### Extra - dPCA: download code from Machens website
 * https://github.com/machenslab/dPCA
-* Copy functions __dpca_explainedVariance__ and __dpca__ to the current folder
+* Copy functions __dpca_explainedVariance__, __dpca_marginalize__ and __dpca__ to the current folder
 
 ```matlab
 plot_dpca
 ```
+![DPCA](images/plot_dpca.png)

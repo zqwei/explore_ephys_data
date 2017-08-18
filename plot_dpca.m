@@ -6,6 +6,7 @@
 % You need download function named:
 % 1. dpca
 % 2. dpca_explainedVariance
+% 3. dpca_marginalize
 % 
 % from
 % https://github.com/machenslab/dPCA/tree/master/matlab
@@ -55,4 +56,4 @@ ylim([0 100])
 xlabel('Component index')
 set(gca,'xTick', 0:numComps)
 ylabel('% EV per PC')
-save(
+print('images/plot_dpca','-dpng')
