@@ -188,7 +188,7 @@ plot_CD_sim
 * Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD using function __func_orthrog_vectors__
 ![](images/plot_neural_activity_project_to_other_direction.png)
 
-* Related reference: Li, Daie,
+* Related reference: Nuo Li, Kayvon Daie,	Karel Svoboda	& Shaul Druckmann (Nature, 2016) http://www.nature.com/nature/journal/v532/n7600/full/nature17643.html
 
 ### Extra - dPCA: download code from Machens website
 * https://github.com/machenslab/dPCA
@@ -198,3 +198,5 @@ plot_CD_sim
 plot_dpca
 ```
 ![DPCA](images/plot_dpca.png)
+
+* Related reference: D Kobak, W Brendel, C Constantinidis, CE Feierstein, A Kepecs, ZF Mainen, X-L Qi, R Romo, N Uchida, CK Machens (eLife 2016) https://elifesciences.org/content/5/e10989
