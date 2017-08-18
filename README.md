@@ -48,6 +48,7 @@ cell_idx = 100; % cell at 100th row of the ephysDataset array
 seesionInfo = ephysDataset(cell_idx).sessionIndex;
 unitInfo = ephysDataset(cell_idx).nUnit;
 ```
+
     * Try the code for another neuron and report its recording session and its unit index in the recording array.
     * Try the code for the same neuron and report its location in depth and cell type.
 
