@@ -37,43 +37,45 @@ This is repo for the hand-on lecture on 08/21.
 * timetag: timing information using for all data points binned by 67 ms discrete time bins.
 
 ### Hands-on Dataset
-* Load data file
+#### Load data file
 ```matlab
 load('ephysDataset.mat')
 ```
 
-* Get session and unit indices for a cell from its cell index
+#### Get session and unit indices for a cell from its cell index
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
-seesionInfo = ephysDataset(cell_idx).sessionIndex;
-unitInfo = ephysDataset(cell_idx).nUnit;
+    cell_idx = 100; % cell at 100th row of the ephysDataset array
+    seesionInfo = ephysDataset(cell_idx).sessionIndex;
+    unitInfo = ephysDataset(cell_idx).nUnit;
 ```
+##### Extra
+* Try the code for another neuron and report its recording session and its unit index in the recording array.
+* Try the code for the same neuron and report its location in depth and cell type.
 
-    * Try the code for another neuron and report its recording session and its unit index in the recording array.
-    * Try the code for the same neuron and report its location in depth and cell type.
-
-* Get spike time information for a cell in n_th_ lick-right trial
+#### Get spike time information for a cell in n_th_ lick-right trial
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
 nTrial = 2; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial{nTrial};
 ```
-  * Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
+##### Extra
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
-* Get precomputed psth for a cell in n_th_ lick-right trial
+#### Get precomputed psth for a cell in n_th_ lick-right trial
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
 nTrial = 2; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial_spk_time(nTrial,:);
 ```
-    * Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
+##### Extra
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
-* Get time tag aligned with precomputed psth for a cell in n_th_ lick-right trial
+#### Get time tag aligned with precomputed psth for a cell in n_th_ lick-right trial
 ```matlab
 timetag;
 ```
 
-* Run all analyses (see code tasks as follow)
+#### Run all analyses (see code tasks as follow)
 ```matlab
 all_compiled;
 ```
