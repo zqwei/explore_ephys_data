@@ -13,6 +13,7 @@
 load('ephysDataset.mat')
 
 sampleRate = 14.84;
+cellId = 1;
 
 % fano factor is computed as the variance of spike counts across trial over 
 % its mean across trial
@@ -35,3 +36,4 @@ xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
 ylabel('Fano factor')
 hold off
+print('images/plot_ff','-dpng')

@@ -146,6 +146,7 @@ meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
 varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
 FF_R  = varR./meanR;
 ```
+![Fano factor](images/plot_ff.png)
 * Extra - does Fano Factor increase or decrease during the delay epoch? Compare Sample epoch, Early Delay and Late Delay
 ### Error trial analysis — is activity similar or different?
 * Run analyses above using error trials.
@@ -157,7 +158,7 @@ plot_session_PSTH_with_selectivity
 ```
 ### Grand average --  spike rate (sr)
 * Tips: using __for__ loop to compute sr(R) and sr(L) for correct trials in lick-right and left conditions for each cell
-* Tips: average across cells in each condition 
+* Tips: average across cells in each condition
 ### Grand average selectivity, sr(L) - sr(R) (correct trials only)
 ### Grand average, abs(sr(R) - sr(L))
 

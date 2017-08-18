@@ -55,3 +55,4 @@ ylim([0 100])
 xlabel('Component index')
 set(gca,'xTick', 0:numComps)
 ylabel('% EV per PC')
+save(
