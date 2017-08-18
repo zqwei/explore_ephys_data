@@ -38,6 +38,9 @@ This is repo for the hand-on lecture on 08/21.
 ## Cell-based analyses
 ### Plot rasters
 * each spike a dot
+```matlab
+A+B
+```
 * trials arrayed in the vertical dimension, time in the horizontal dimension
 ### Estimate mean spike rate
 * try different averaging windows
