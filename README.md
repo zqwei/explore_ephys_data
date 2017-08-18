@@ -133,37 +133,54 @@ meanR - meanL
 ```matlab
 plot_PSTH_with_selectivity
 ```
-* Extra - Fano Factors
+### Extra - Fano Factors
 ```matlab
 plot_ff
 ```
-    * Fano factor for a trial-type at a time bin is defined as the variance of spike counts over its mean
-    https://en.wikipedia.org/wiki/Fano_factor . To convert spike rate to spike counts, one needs to normalize
-    it with the size of the time bin (sampleRate) in the following code. For correct lick-right condition:
-    ```matlab
-    sampleRate = 14.84;
-    meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
-    varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
-    FF_R  = varR./meanR;
-    ```
+* Fano factor for a trial-type at a time bin is defined as the variance of spike counts over its mean
+https://en.wikipedia.org/wiki/Fano_factor . To convert spike rate to spike counts, one needs to normalize
+it with the size of the time bin (sampleRate) in the following code. For correct lick-right condition:
+```matlab
+sampleRate = 14.84;
+meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
+varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
+FF_R  = varR./meanR;
+```
 * Extra - does Fano Factor increase or decrease during the delay epoch? Compare Sample epoch, Early Delay and Late Delay
 ### Error trial analysis — is activity similar or different?
 * Run analyses above using error trials.
 
 
 ## Session-based analysis (i.e. across neurons recorded simultaneously in a session)
-### Grand average --  spike rate (__sr__)
-### Grand average, sr(L), sr(R) - correct trials only
+```matlab
+plot_session_PSTH_with_selectivity
+```
+### Grand average --  spike rate (sr)
+* Tips: using __for__ loop to compute sr(R) and sr(L) for correct trials in lick-right and left conditions for each cell
+* Tips: average across cells in each condition 
+### Grand average selectivity, sr(L) - sr(R) (correct trials only)
 ### Grand average, abs(sr(R) - sr(L))
 
 
 ## Dimensionality reduction
-### Find the coding direction - CD; this is the direction in activity space where trial types can best be discriminated
+### Find the coding direction - CD
+* This is the direction in activity space where trial types can best be discriminated
+
 * We will use the simplest definition:
 
 sr_i(R)-sr_i(L)
 
 where i is the cell index; then normalize to produce a unit vector
-* Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD
-* Extra dPCA: download code from Machens website
+
+```matlab
+plot_CD_sim
+```
+
+* Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD using function __func_orthrog_vectors__
+### Extra - dPCA: download code from Machens website
 * https://github.com/machenslab/dPCA
+* Copy functions __dpca_explainedVariance__ and __dpca__ to the current folder
+
+```matlab
+plot_dpca
+```
