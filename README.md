@@ -94,7 +94,7 @@ plot(spkTime, ones(size(spkTime)), '.');
 ```matlab
 plot_raster
 ```
-
+![Raster](images/plot_raster.png)
 ### Estimate mean spike rate
 * In this task, we plot first cell in __ephysDataset__ using precomputed psth
 ```matlab
