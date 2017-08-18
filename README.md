@@ -179,7 +179,17 @@ where i is the cell index; then normalize to produce a unit vector
 plot_CD_sim
 ```
 
+* Explore correlation of coding direction across time
+![](images/plot_coding_direction_correlation.png)
+
+* Explore neural activity projected to coding direction
+![](images/plot_neural_activity_project_to_coding_direction.png)
+
 * Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD using function __func_orthrog_vectors__
+![](images/plot_neural_activity_project_to_other_direction.png)
+
+* Related reference: Li, Daie,
+
 ### Extra - dPCA: download code from Machens website
 * https://github.com/machenslab/dPCA
 * Copy functions __dpca_explainedVariance__, __dpca_marginalize__ and __dpca__ to the current folder

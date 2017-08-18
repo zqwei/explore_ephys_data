@@ -30,7 +30,7 @@ xlabel('Time from movement (sec)')
 ylabel('Time from movement (sec)')
 hold off
 
-
+print('images/plot_coding_direction_correlation','-dpng')
 %% projection of data to delay-epoch coding direction 
 timeToAnalyze =  timeTag > -0.4 & timeTag < 0;
 cdDelay = mean(cdMat(:,timeToAnalyze), 2);
@@ -49,6 +49,7 @@ xlabel('Time from movement (sec)')
 ylabel('Activity projected coding direction')
 hold off
 
+print('images/plot_neural_activity_project_to_coding_direction','-dpng')
 %% find the second biggest mode
 sample_start = -2.6;
 preR = mean(sessionData.unit_yes_trial(:,:,timeTag<sample_start),3);  
@@ -119,7 +120,7 @@ xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
 ylabel('Variance explained by orthogonal direction')
 
-
+print('images/plot_neural_activity_project_to_other_direction','-dpng')
 
 
 
