@@ -159,7 +159,9 @@ plot_session_PSTH_with_selectivity
 ### Grand average --  spike rate (sr)
 * Tips: using __for__ loop to compute sr(R) and sr(L) for correct trials in lick-right and left conditions for each cell
 * Tips: average across cells in each condition
+![session PSTH](images/plot_session_PSTH.png)
 ### Grand average selectivity, sr(L) - sr(R) (correct trials only)
+![session Selectivity](images/plot_session_contra_selectivity.png)
 ### Grand average, abs(sr(R) - sr(L))
 
 
