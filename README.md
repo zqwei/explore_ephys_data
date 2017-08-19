@@ -1,9 +1,10 @@
 # explore ephys data
-This is repo for the hand-on lecture on 08/21.
-The goal of this lecture is to analyze extracellular electrophysiology data acquired during motor-planning task by using Matlab.
-* See "Dataset Description" for descriptions of the behavioral task and data.
-* See "Data access" for codes to load and access data.
-* See rest of the sections for analysis to perform.
+This repo if for the JHU Neuroscience bootcamp, day 1, extrecellular neurophysiology (08/21, 2017).
+The goal is to analyze extracellular electrophysiology data acquired in a delayed reponse task. This set of exercises is in Matlab. 
+* See "Dataset description" for the structure of the data, including behavior and electrophysiology.
+* See "Data access" for code to load and manipulate data.
+* The remainder of the sections if about the analyses to be performed.
+
 
 
 ## Dataset Description
