@@ -10,40 +10,44 @@ The goal of this lecture is to analyze extracellular electrophysiology data acqu
 ### Task description:
 This is an extracellular electrophysiology data recorded during "Tactile delayed response task" in left premotor cortex of mice.
 Recordings were made with 64ch silicon probe.
-* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right).
-* The sample epoch was followed by a "delay epoch", while the animal keep memory of future licking direction.
+* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left (ipsi) or right (contra)).
+* The sample epoch was followed by a "delay epoch", while the animal keeps memory of future licking direction.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
-* Many neurons in premotor cortex show preparatory activity during the delay epoch of the task. Let's analyze the preparatory activity both at single cell and population level.
+* When the animal licks the correct direction it receives water reward (correct trials). When it licks the wrong direction, there is no reward (error trials). 
+* Many neurons in premotor cortex show preparatory activity during the delay epoch. Let's analyze the preparatory activity both at single cell and population level.
 
 ![task](images/task.png)
 
 ### Task structure:
-* Pre-sample: -3.1 to -2.6 sec.
-* Sample: -2.6 to -1.3 sec.
-* Delay: -1.3 to 0 sec.
-* Response: 0 to 2 sec.
+* Pre-sample : -3.1 to -2.6 sec.
+* Sample     : -2.6 to -1.3 sec.
+* Delay      : -1.3 to  0.0 sec.
+* Response   :  0.0 to  2.0 sec.
 
 ### Data structure:
-Here we have data from 5 recording sessions. In each session we have hundreds of behavioral trials with different trial types. In each recording session, we have multiple units (neurons) recorded simultaneously.
-* All cells in exemplary analyses are stored in an array named __ephysDataset__
-* Cell index: index of cell in the __ephysDataset__ array.
-* sessionIndex: index of the session which neuron is recorded.  
-* nUnit: index of the neuron(unit) in each recording session.
-* unit_yes_trial: correct right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_no_trial : correct left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_yes_trial_index: trial index for each correct right-lick trial.
-* unit_no_trial_index : trial index for each correct left-lick trial.
-* unit_yes_trial_spk_time: spike times for each neuron/unit in a correct right-lick trial (sec).
-* unit_no_trial_spk_time : spike times for each neuron/unit in a correct left-lick trial (sec).
-* unit_yes_error: error right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_no_error : error left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_yes_error_index: trial index for each error right-lick trial.
-* unit_no_error_index : trial index for each error left-lick trial.
-* unit_yes_error_spk_time: spike times for each neuron/unit in an error right-lick trial (unit in sec).
-* unit_no_error_spk_time : spike times for each neuron/unit in an error left-lick trial (unit in sec).
-* depth_in_um: recording depth of the unit in um.
+Here we have data from 5 recording sessions. In each session, we have hundreds of behavioral trials with different trial types. In each recording session, we have multiple units (neurons) recorded simultaneously.
+
+* Spiking data is stored in an structure array named __ephysDataset__
+* sessionIndex: index of the session in which neuron was recorded.  
+* nUnit       : index of the neuron(unit) in each recording session.
+
+* unit_yes_trial: Spik counts in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_no_trial : Spik counts in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_yes_trial_index: trial index of each correct right-lick trial.
+* unit_no_trial_index : trial index of each correct left-lick trial.
+* unit_yes_trial_spk_time: Timing of each spike in correct right-lick trials (sec).
+* unit_no_trial_spk_time : Timing of each spike in correct left-lick trials (sec).
+
+* unit_yes_error: Spik counts in error right-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_no_error : Spik counts in error left-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_yes_error_index: trial index of each error right-lick trial.
+* unit_no_error_index : trial index of each error left-lick trial.
+* unit_yes_error_spk_time: Timing of each spike in error right-lick trials (unit in sec).
+* unit_no_error_spk_time : Timing of each spike in error left-lick trials (unit in sec).
+
+* depth_in_um: recording depth of the unit in um. We don't use this info int this lecture.
 * cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
-* timetag    : timing information using for all data points binned by 67 ms discrete time bins.
+* __timetag__    : timing of each bin (67 ms discrete time bins).
 
 
 ### Access data
