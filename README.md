@@ -8,6 +8,7 @@ This is repo for the hand-on lecture on 08/21.
 * The sample epoch was followed by a "delay epoch", while the animal was trained not to move.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
 
+![task](images/task.png)
 
 ### Task structure:
 * Pre-sample: -3.1 to -2.6 sec.
