@@ -2,7 +2,7 @@
 This is repo for the hand-on lecture on 08/21.
 The goal of this lecture is to analyze extracellular electrophysiology data acquired during motor-planning task by using Matlab.
 * See "Dataset Description" for descriptions of the behavioral task and data.
-* See "Access data" for codes to load and access data.
+* See "Data access" for codes to load and access data.
 * See rest of the sections for analysis to perform.
 
 
@@ -30,15 +30,15 @@ Here we have data from 5 recording sessions. In each session, we have hundreds o
 * Spiking data is stored in an structure array named __ephysDataset__
 * sessionIndex: index of the session in which neuron was recorded.  
 * nUnit       : index of the neuron(unit) in each recording session.
-* unit_yes_trial: spike counts in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
-* unit_no_trial : spike counts in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_yes_trial: spike rates in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_no_trial : spike rates in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
 * unit_yes_trial_spk_time: timing of each spike in correct right-lick trials (sec).
 * unit_no_trial_spk_time : timing of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: spike counts in error right-lick trial. Spikes were binned by 67 ms discretely in time.
-* unit_no_error : spike counts in error left-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_yes_error: spike rates in error right-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_no_error : spike rates in error left-lick trial. Spikes were binned by 67 ms discretely in time.
 * unit_yes_error_index: trial index of each error right-lick trial.
 * unit_no_error_index : trial index of each error left-lick trial.
 * unit_yes_error_spk_time: timing of each spike in error right-lick trials (unit in sec).
@@ -49,7 +49,7 @@ Here we have data from 5 recording sessions. In each session, we have hundreds o
 * __timetag__    : timing of each bin (67 ms discrete time bins).
 
 
-## Access data
+## Data access
 #### Load data file
 ```matlab
 load('ephysDataset.mat')
@@ -95,30 +95,33 @@ all_compiled;
 
 ## Cell-based analyses
 ### Plot rasters
-* each spike a dot (see also __Hands-on Dataset__ for detail)
+* Plot each spike in a single trial as a dot (see also __Data access__ for detail)
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
-nTrial = 2; % the second lick-right trial
+nTrial = 10; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
+figure;
 plot(spkTime, ones(size(spkTime)), '.');
 ```
 
-* trials arrayed in the vertical dimension, time in the horizontal dimension
+* Now plot spikes in all correct right and left trials. Trials arrayed in the vertical dimension, time in the horizontal dimension
+* Example code and result are shown below.
 ```matlab
 plot_raster
 ```
 <img src='images/plot_raster.png' width='500px'></img>
 ### Estimate mean spike rate for different trial types
-* In this task, we plot first cell in __ephysDataset__ using precomputed psth
+* First we plot spike rates in a single trial of an example cell 
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
-nTrial = 2; % the second lick-right trial
-psth = ephysDataset(cell_idx).unit_yes_trial_spk_time(nTrial,:);
+nTrial = 10; % the second lick-right trial
+psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
+figure;
 plot(timeTag, psth);
 ```
-* Extra - try different averaging windows
+* Extra - Create spike count 
 
-* In this task, we plot it for first cell in __ephysDataset__ array using _mean_ function in correct trials
+* Next, plot mean peri-stimulus histogram (PSTH): average spike rates among trials using _mean_ function.
 ```matlab
 cellId = 1; % cell to plot
 meanR = mean(ephysDataset(cellId).unit_yes_trial,1); % mean PSTH of lick R trial
@@ -134,14 +137,14 @@ ylabel('Spikes per s')
 hold off
 ```
 <img src='images/plot_PSTH.png' width='500px'></img>
-* Extra - test for stationarity of sr across time in the session
+
 ### Compute selectivity
-* selectivity is defined as sr(R) - sr(L)
+* selectivity is defined as spike rate difference between two trial types
 ```matlab
 meanR - meanL
 ```
-* do statistical test (bootstrapping or ranksum)
-* related code
+* Plot selectivity of each neuron and do statistical test (ranksum test comparing two trial types)
+* example code and result 
 ```matlab
 plot_PSTH_with_selectivity
 ```
@@ -166,19 +169,22 @@ FF_R  = varR./meanR;
 
 
 ## Session-based analysis (i.e. across neurons recorded simultaneously in a session)
-```matlab
-plot_session_PSTH_with_selectivity
-```
+
 ### Grand average --  spike rate (sr)
-* Tips: using __for__ loop to compute sr(R) and sr(L) for correct trials in lick-right and left conditions for each cell
+* Tips: using __for__ loop to compute mean spike rate for correct trials in lick-right and left conditions for each cell
 * Tips: average across cells in each condition
 
 <img src='images/plot_session_PSTH.png' width='500px'></img>
-### Grand average selectivity, sr(L) - sr(R) (correct trials only)
+### Grand average selectivity,(correct trials only)
+* Tips: Flip selectivity if it is negative during the delay epoch.
 
 <img src='images/plot_session_contra_selectivity.png' width='500px'></img>
 ### Grand average, abs(sr(R) - sr(L))
 
+* Example code
+```matlab
+plot_session_PSTH_with_selectivity
+```
 
 ## Dimensionality reduction
 ### Find the coding direction - CD
@@ -186,19 +192,18 @@ plot_session_PSTH_with_selectivity
 
 * We will use the simplest definition:
 
-sr_i(R)-sr_i(L)
+ sr_R(i)-sr_L(i)
 
-where i is the cell index; then normalize to produce a unit vector
+where sr_R is spike rate in lick-right trials, sr_L is spike rate in lick-left trials, and i is the cell index.
+Calculate this vector for each time point, then normalize (divided by norm) to produce a unit vector.
 
-```matlab
-plot_CD_sim
-```
 
 * Explore correlation of coding direction across time
 
 <img src='images/plot_coding_direction_correlation.png' width='500px'></img>
 
 * Explore neural activity projected to coding direction
+* To project population activity to CD, calculate inner dot: sr_R * CD.
 
 <img src='images/plot_neural_activity_project_to_coding_direction.png' width='500px'></img>
 
@@ -207,6 +212,11 @@ plot_CD_sim
 <img src='images/plot_neural_activity_project_to_other_direction.png' width='500px'></img>
 
 * Related reference: Nuo Li, Kayvon Daie,	Karel Svoboda	& Shaul Druckmann (Nature, 2016) http://www.nature.com/nature/journal/v532/n7600/full/nature17643.html
+
+* Example code
+```matlab
+plot_CD_sim
+```
 
 ### Extra - dPCA: download code from Machens website
 * https://github.com/machenslab/dPCA
