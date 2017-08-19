@@ -8,9 +8,9 @@ The goal of this lecture is to analyze extracellular electrophysiology data acqu
 
 ## Dataset Description
 ### Task description:
-This is an extracellular electrophysiology data recorded during "Tactile delayed response task" in left premotor cortex of mice.
+This is an extracellular electrophysiology data recorded during "Tactile delayed response task" in premotor cortex of mice.
 Recordings were made with 64ch silicon probe.
-* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right). Because recordings were made from left hemisphere, left and right are referred to as ipsi and contra directions.
+* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right). Because recordings were in left hemisphere, left and right are referred to as ipsi and contra directions.
 * The sample epoch was followed by a "delay epoch", while the animal keeps memory of future licking direction.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
 * When the animal licks the correct direction it receives water reward (correct trials). When it licks the wrong direction, there is no reward (error trials). 
@@ -30,64 +30,63 @@ Here we have data from 5 recording sessions. In each session, we have hundreds o
 * Spiking data is stored in an structure array named __ephysDataset__
 * sessionIndex: index of the session in which neuron was recorded.  
 * nUnit       : index of the neuron(unit) in each recording session.
-
-* unit_yes_trial: Spik counts in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
-* unit_no_trial : Spik counts in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_yes_trial: spike counts in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_no_trial : spike counts in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
-* unit_yes_trial_spk_time: Timing of each spike in correct right-lick trials (sec).
-* unit_no_trial_spk_time : Timing of each spike in correct left-lick trials (sec).
+* unit_yes_trial_spk_time: timing of each spike in correct right-lick trials (sec).
+* unit_no_trial_spk_time : timing of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: Spik counts in error right-lick trial. Spikes were binned by 67 ms discretely in time.
-* unit_no_error : Spik counts in error left-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_yes_error: spike counts in error right-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_no_error : spike counts in error left-lick trial. Spikes were binned by 67 ms discretely in time.
 * unit_yes_error_index: trial index of each error right-lick trial.
 * unit_no_error_index : trial index of each error left-lick trial.
-* unit_yes_error_spk_time: Timing of each spike in error right-lick trials (unit in sec).
-* unit_no_error_spk_time : Timing of each spike in error left-lick trials (unit in sec).
+* unit_yes_error_spk_time: timing of each spike in error right-lick trials (unit in sec).
+* unit_no_error_spk_time : timing of each spike in error left-lick trials (unit in sec).
 
 * depth_in_um: recording depth of the unit in um. We don't use this info int this lecture.
 * cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
 * __timetag__    : timing of each bin (67 ms discrete time bins).
 
 
-### Access data
+## Access data
 #### Load data file
 ```matlab
 load('ephysDataset.mat')
 ```
 
-#### Get session and unit indices for a cell from its cell index
+#### Get session and unit indices for a neuron
 ```matlab
     cell_idx = 100; % cell at 100th row of the ephysDataset array
     seesionInfo = ephysDataset(cell_idx).sessionIndex;
     unitInfo = ephysDataset(cell_idx).nUnit;
 ```
 ##### Extra
-* Try the code for another neuron and report its recording session and its unit index in the recording array.
+* Try the code for another neuron and report its recording session and its unit index.
 * Try the code for the same neuron and report its location in depth and cell type.
 
-#### Get spike time information for a cell in n_th_ lick-right trial
+#### Get spike counts for a neuron in one of lick-right trials
 ```matlab
 cell_idx = 100; % cell at 100th row of the ephysDataset array
 nTrial = 2; % the second lick-right trial
-spkTime = ephysDataset(cell_idx).unit_yes_trial{nTrial};
+psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 ```
 ##### Extra
 * Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
-#### Get precomputed psth for a cell in n_th_ lick-right trial
-```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
-nTrial = 2; % the second lick-right trial
-psth = ephysDataset(cell_idx).unit_yes_trial_spk_time(nTrial,:);
-```
-##### Extra
-* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
-
-#### Get time tag aligned with precomputed psth for a cell in n_th_ lick-right trial
+#### Get timing of each bins for the spike counts
 ```matlab
 timetag;
 ```
+
+#### Get spike time for a neuron in one of lick-right trials
+```matlab
+cell_idx = 100; % cell at 100th row of the ephysDataset array
+nTrial = 2; % the second lick-right trial
+spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
+```
+##### Extra
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
 #### Run all analyses (see code tasks as follow)
 ```matlab
