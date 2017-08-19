@@ -1,12 +1,19 @@
 # explore ephys data
 This is repo for the hand-on lecture on 08/21.
+The goal of this lecture is to analyze extracellular electrophysiology data acquired during motor-planning task by using Matlab.
+* See "Dataset Description" for description of the behavioral task and data.
+* See "Access data" for codes to load and access data
+* See rest of the sections for analysis to perform.
+
 
 ## Dataset Description
 ### Task description:
-* Tactile delayed response task
+This is an extracellular electrophysiology data recording during "Tactile delayed response task" left in premotor cortex of mice.
+Recordings were made with 
 * A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right).
-* The sample epoch was followed by a "delay epoch", while the animal was trained not to move.
+* The sample epoch was followed by a "delay epoch", while the animal keep memory of future licking direction.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
+* Many neurons in premotor cortex show preparatory activity during the delay epoch of the task. Let's analyze the preparatory activity both at single cell and population level.
 
 ![task](images/task.png)
 
@@ -14,30 +21,32 @@ This is repo for the hand-on lecture on 08/21.
 * Pre-sample: -3.1 to -2.6 sec.
 * Sample: -2.6 to -1.3 sec.
 * Delay: -1.3 to 0 sec.
-* Response: 0 - 2 sec.
+* Response: 0 to 2 sec.
 
 ### Data structure:
+Here we have data from 5 recording sessions. In each session we have hundreds of behavioral trials with different trial types. In each recording session, we have multiple units (neurons) recorded simultaneously.
 * All cells in exemplary analyses are stored in an array named __ephysDataset__
 * Cell index: index of cell in the __ephysDataset__ array.
-* sessionIndex : index of the session which neuron is recorded. Each session is recorded by JRC multi-electrode arrays (64 channels).
+* sessionIndex: index of the session which neuron is recorded.  
 * nUnit: index of the neuron(unit) in each recording session.
 * unit_yes_trial: correct right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_no_trial: correct left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
+* unit_no_trial : correct left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
 * unit_yes_trial_index: trial index for each correct right-lick trial.
-* unit_no_trial_index: trial index for each correct left-lick trial.
-* unit_yes_trial_spk_time: spike times for each neuron/unit in a correct right-lick trial (unit in sec).
-* unit_no_trial_spk_time: spike times for each neuron/unit in a correct left-lick trial (unit in sec).
+* unit_no_trial_index : trial index for each correct left-lick trial.
+* unit_yes_trial_spk_time: spike times for each neuron/unit in a correct right-lick trial (sec).
+* unit_no_trial_spk_time : spike times for each neuron/unit in a correct left-lick trial (sec).
 * unit_yes_error: error right-lick trial (contra-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
-* unit_no_error: error left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
+* unit_no_error : error left-lick trial (ipsi-laterial behavior trial) where spike count is binned by 67 ms discretely in time.
 * unit_yes_error_index: trial index for each error right-lick trial.
-* unit_no_error_index: trial index for each error left-lick trial.
+* unit_no_error_index : trial index for each error left-lick trial.
 * unit_yes_error_spk_time: spike times for each neuron/unit in an error right-lick trial (unit in sec).
-* unit_no_error_spk_time: spike times for each neuron/unit in an error left-lick trial (unit in sec).
+* unit_no_error_spk_time : spike times for each neuron/unit in an error left-lick trial (unit in sec).
 * depth_in_um: recording depth of the unit in um.
-* cell_type: putative pyramidal cells -- 1; fast-spiking interneurons: 0.
-* timetag: timing information using for all data points binned by 67 ms discrete time bins.
+* cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
+* timetag    : timing information using for all data points binned by 67 ms discrete time bins.
 
-### Hands-on Dataset
+
+### Access data
 #### Load data file
 ```matlab
 load('ephysDataset.mat')
