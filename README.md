@@ -27,9 +27,9 @@ The data set was acquired in mice performing a "tactile delayed response task". 
 ### Data structure:
 This repo contains data from 5 recording sessions. Each session contains hundreds of behavioral trials with different trial types. Multiple units (neurons) were recorded simultaneously. We did not provide the raw extracellular waveforms, but only  'sorted' spikes. The process (some would say dark art) of 'spike sorting' is beyond the scope of this tutorial.  
 
-* Spikes are stored in a structure array named __ephysDataset__
-* sessionIndex: index of the session in which each neuron was recorded.  
-* nUnit       : index of the neuron(unit) in each recording session.
+* Spikes are stored in a structure array named __ephysDataset__. The data set has 125 units, each with its own structure. 
+* sessionIndex: index of the session in which each neuron was recorded. For example, the first 26 units all derive from session 1.  
+* nUnit       : index of the neuron(unit) in each recording session. nUnit for the first 26 units runs from 1-26, and then resets to 1 for the first unity of session 2, etc.
 * unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned into 67 ms bins.
 * unit_no_trial : spike rates in correct left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
