@@ -71,7 +71,6 @@ xlim([-3  1.5]);
 xlabel('Time (s)')
 ylabel('Spikes per s')
 hold off
-print('images/plot_session_PSTH','-dpng')
 
 %% plot the selectivity
 figure
@@ -82,4 +81,3 @@ xlim([-3  1.5]);
 xlabel('Time (s)')
 ylabel('Selectivity (Spikes per s)')
 hold off
-print('images/plot_session_contra_selectivity','-dpng')

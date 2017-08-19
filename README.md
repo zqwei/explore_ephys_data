@@ -30,8 +30,8 @@ Here we have data from 5 recording sessions. In each session, we have hundreds o
 * Spiking data is stored in an structure array named __ephysDataset__
 * sessionIndex: index of the session in which neuron was recorded.  
 * nUnit       : index of the neuron(unit) in each recording session.
-* unit_yes_trial: spike rates in correct right-lick trial (contra-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
-* unit_no_trial : spike rates in correct left-lick trial (ipsi-lateral behavior trial). Spikes were binned by 67 ms discretely in time.
+* unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_no_trial : spike rates in correct left-lick trial. Spikes were binned by 67 ms discretely in time.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
 * unit_yes_trial_spk_time: timing of each spike in correct right-lick trials (sec).
@@ -67,7 +67,7 @@ load('ephysDataset.mat')
 
 #### Get spike counts for a neuron in one of lick-right trials
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
+cell_idx = 100; % cell at 100th row of the ephysDataset 
 nTrial = 2; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 ```
@@ -81,7 +81,7 @@ timetag;
 
 #### Get spike time for a neuron in one of lick-right trials
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
+cell_idx = 1; % cell at 1st row of the ephysDataset 
 nTrial = 2; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 ```
@@ -97,7 +97,7 @@ all_compiled;
 ### Plot rasters
 * Plot each spike in a single trial as a dot (see also __Data access__ for detail)
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
+cell_idx = 100; % cell at 100th row of the ephysDataset 
 nTrial = 10; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 figure;
@@ -113,7 +113,7 @@ plot_raster
 ### Estimate mean spike rate for different trial types
 * First we plot spike rates in a single trial of an example cell 
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset array
+cell_idx = 1; % cell at 1st row of the ephysDataset 
 nTrial = 10; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 figure;
@@ -195,7 +195,7 @@ plot_session_PSTH_with_selectivity
  sr_R(i)-sr_L(i)
 
 where sr_R is spike rate in lick-right trials, sr_L is spike rate in lick-left trials, and i is the cell index.
-Calculate this vector for each time point, then normalize (divided by norm) to produce a unit vector.
+Calculate this vector for each time point, then normalize (divide by norm) to produce a unit vector.
 
 
 * Explore correlation of coding direction across time

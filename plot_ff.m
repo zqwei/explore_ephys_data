@@ -36,4 +36,3 @@ xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
 ylabel('Fano factor')
 hold off
-print('images/plot_ff','-dpng')

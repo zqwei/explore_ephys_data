@@ -15,7 +15,7 @@ numUnit = length(sessionData.nUnit);
 numTime = length(timeTag);
 
 %% coding direction
-meanMatR = squeeze(mean(sessionData.unit_yes_trial));
+meanMatR = squeeze(mean(sessionData.unit_yes_trial)); % mean spike rate of each neuron at each time bin
 meanMatL = squeeze(mean(sessionData.unit_no_trial));
 cdMat    = meanMatR - meanMatL;
 
@@ -30,12 +30,12 @@ xlabel('Time from movement (sec)')
 ylabel('Time from movement (sec)')
 hold off
 
-print('images/plot_coding_direction_correlation','-dpng')
+
 %% projection of data to delay-epoch coding direction 
-timeToAnalyze =  timeTag > -0.4 & timeTag < 0;
-cdDelay = mean(cdMat(:,timeToAnalyze), 2);
-cdDelay = cdDelay/norm(cdDelay);
-cdProjR    = meanMatR' * cdDelay;
+timeToAnalyze =  timeTag > -0.4 & timeTag < 0; 
+cdDelay = mean(cdMat(:,timeToAnalyze), 2); % avergae CD duirng the last 400ms of the delay epoch
+cdDelay = cdDelay/norm(cdDelay); % normlize CD to be unit vector
+cdProjR    = meanMatR' * cdDelay;  % projecton of lickR trial activity to CD
 cdProjL    = meanMatL' * cdDelay;
 
 figure;
@@ -49,28 +49,28 @@ xlabel('Time from movement (sec)')
 ylabel('Activity projected coding direction')
 hold off
 
-print('images/plot_neural_activity_project_to_coding_direction','-dpng')
+
 %% find the second biggest mode
+
+% acquire spike rate at pre sample peoch to subtract baseline spike rate
 sample_start = -2.6;
 preR = mean(sessionData.unit_yes_trial(:,:,timeTag<sample_start),3);  
 preL = mean(sessionData.unit_no_trial(:,:,timeTag<sample_start),3);   
 baseline_matrix = [preR;preL];
 rdMat = nan(numUnit,numTime);
 
-% number of mode
-n = 1;
-
+% Do SVD at each time point
 for t = 1:numTime
-    data = [ squeeze(sessionData.unit_yes_trial(:,:,t)); squeeze(sessionData.unit_no_trial(:,:,t))];
+    data = [ squeeze(sessionData.unit_yes_trial(:,:,t)); squeeze(sessionData.unit_no_trial(:,:,t))]; % spike rate at each time point
     data = data-baseline_matrix;
-    [~,~,svd_v] = svd(data); % svd of R & L
-    rdMat(:,t)=svd_v(:,n);
+    [~,~,svd_v] = svd(data); % svd of spike rate 
+    rdMat(:,t)=svd_v(:,1);   % extarct the first component
 end
 
 % average it and rotate to CD
-rdDelay = mean(rdMat(:, timeToAnalyze), 2);
-[orth_Delay,along] = func_orthrog_vectors(cdDelay,rdDelay);
-orth_Delay = orth_Delay/norm(orth_Delay);
+rdDelay = mean(rdMat(:, timeToAnalyze), 2); % average SVD mode during the last 400ms of the delay epoch
+[orth_Delay,along] = func_orthrog_vectors(cdDelay,rdDelay); % rotatet the mode to CD
+orth_Delay = orth_Delay/norm(orth_Delay); % normalize it
 
 %% projection of data to remainant direction
 odProjR    = meanMatR' * orth_Delay;
@@ -89,16 +89,19 @@ hold off
             
             
 %% variance explained
-% SR 
+
+% first calucalte the square sum of spike rate among all neurons
 srR = squeeze(mean(sessionData.unit_yes_trial,1));  
 srL = squeeze(mean(sessionData.unit_no_trial,1)); 
 
 varR   = sum(srR.^2,1);
 varL   = sum(srL.^2,1);
 
+% square of projection to CD
 varCdR   = cdProjR'.^2;
 varCdL   = cdProjL'.^2;
 
+% square of projection to orthogonal direction
 varOdR   = odProjR'.^2;
 varOdL   = odProjL'.^2;
 
@@ -120,7 +123,6 @@ xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
 ylabel('Variance explained by orthogonal direction')
 
-print('images/plot_neural_activity_project_to_other_direction','-dpng')
 
 
 

@@ -38,5 +38,5 @@ xlabel('Time (s)')
 ylabel('Contra selectivity (Spikes per s)')
 hold off
 
-print('images/plot_contra_selectivity','-dpng')
+
 
