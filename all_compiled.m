@@ -38,15 +38,12 @@ plot_session_PSTH_with_selectivity
 %% Dimensionality reduction
 
 %%
-% 8. Coding direction:
-plot_CD
-
-%%
-% 9. Seconding max variance direction orthognal to coding direction
+% 8. CD and seconding max variance direction orthognal to coding direction
 
 plot_CD_sim
+
 %%
-% 10. dPCA
+% 9. dPCA
 % optional
 
 plot_dpca

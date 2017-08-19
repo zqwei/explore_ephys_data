@@ -47,7 +47,7 @@ Here we have data from 5 recording sessions. In each session, we have hundreds o
 * depth_in_um: recording depth of the unit in um. We don't use this info int this lecture.
 * cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
 * __timetag__    : timing of each bin (67 ms discrete time bins).
-
+* __simDataset__ : Dataset for "Dimensionality reduction". See "Dimensionality reduction" for detail. 
 
 ## Data access
 #### Load data file
@@ -187,6 +187,11 @@ plot_session_PSTH_with_selectivity
 ```
 
 ## Dimensionality reduction
+### Data
+Data is in a structure array named __simDataset__ . This is a single session data. Fourteen neurons were simultaneously recorded. You need to use 2 field described below for the analysis. Ignore others.
+* unit_yes_trial : Spike rate of lick R trials in [trial, neuron, tim bin] format. There are 115 trials, 14 neurons, 77 time bin.
+* unit_no_trial  : Spike rate of lick R trials in [trial, neuron, tim bin] format. There are 94 trials, 14 neurons, 77 time bin.
+
 ### Find the coding direction - CD
 * This is the direction in activity space where trial types can best be discriminated
 

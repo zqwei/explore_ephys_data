@@ -10,13 +10,18 @@
 
 load('ephysDataset.mat')
 
-sessionData = simDataset;
-numUnit = length(sessionData.nUnit);
-numTime = length(timeTag);
+% use simDataset for the analysis
+% unit_yes_trial : Spike rate of lick R trials in [trial, neuron, tim bin] format
+% unit_no_trial  : Spike rate of lick R trials in [trial, neuron, tim bin] format
+
+numUnit = size(simDataset.unit_yes_trial,2); % number of unit
+numTime = length(timeTag); % number of time bin
 
 %% coding direction
-meanMatR = squeeze(mean(sessionData.unit_yes_trial)); % mean spike rate of each neuron at each time bin
-meanMatL = squeeze(mean(sessionData.unit_no_trial));
+meanMatR = squeeze(mean(simDataset.unit_yes_trial,1)); 
+% mean spike rate of each neuron at each time bin. Mean was caluclated over
+% trials. Then squeezed to be 2 dimensional.
+meanMatL = squeeze(mean(simDataset.unit_no_trial,1));
 cdMat    = meanMatR - meanMatL;
 
 figure;
@@ -54,14 +59,14 @@ hold off
 
 % acquire spike rate at pre sample peoch to subtract baseline spike rate
 sample_start = -2.6;
-preR = mean(sessionData.unit_yes_trial(:,:,timeTag<sample_start),3);  
-preL = mean(sessionData.unit_no_trial(:,:,timeTag<sample_start),3);   
+preR = mean(simDataset.unit_yes_trial(:,:,timeTag<sample_start),3);  
+preL = mean(simDataset.unit_no_trial(:,:,timeTag<sample_start),3);   
 baseline_matrix = [preR;preL];
 rdMat = nan(numUnit,numTime);
 
 % Do SVD at each time point
 for t = 1:numTime
-    data = [ squeeze(sessionData.unit_yes_trial(:,:,t)); squeeze(sessionData.unit_no_trial(:,:,t))]; % spike rate at each time point
+    data = [ squeeze(simDataset.unit_yes_trial(:,:,t)); squeeze(simDataset.unit_no_trial(:,:,t))]; % spike rate at each time point
     data = data-baseline_matrix;
     [~,~,svd_v] = svd(data); % svd of spike rate 
     rdMat(:,t)=svd_v(:,1);   % extarct the first component
@@ -91,8 +96,8 @@ hold off
 %% variance explained
 
 % first calucalte the square sum of spike rate among all neurons
-srR = squeeze(mean(sessionData.unit_yes_trial,1));  
-srL = squeeze(mean(sessionData.unit_no_trial,1)); 
+srR = squeeze(mean(simDataset.unit_yes_trial,1));  
+srL = squeeze(mean(simDataset.unit_no_trial,1)); 
 
 varR   = sum(srR.^2,1);
 varL   = sum(srL.^2,1);
