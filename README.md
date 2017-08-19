@@ -9,7 +9,7 @@ The goal is to analyze extracellular electrophysiology data acquired in a delaye
 
 ## Dataset Description
 ### Task description:
-The data set was acquired in mice performing a "tactile delayed response task". Recordings were made in the premotor cortex using 64ch silicon probes (for more information see Guo, Z, Li, N et al 2014 Neuron; Li, N, Daie, K et al 2016 Nature).
+The data set was acquired in mice performing a "tactile delayed response task". Recordings were made in the premotor cortex using 64ch silicon probes (for more information see Guo, Z, Li, N et al 2014 Neuron; Li, N, Daie, K et al 2016 Nature; included in the repository).
 * An object was presented to the whiskers during a "sample epoch". The location of the object instructs the animal which direction to lick (left or right). Because recordings were in left hemisphere, left and right are referred to as ipsi and contra directions.
 * The sample epoch was followed by a "delay epoch", during which the mouse has to maintain a memory of future licking direction.
 * At the end of the delay epoch, and signaling the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
