@@ -95,7 +95,7 @@ plot(spkTime, ones(size(spkTime)), '.');
 ```matlab
 plot_raster
 ```
-![Raster](images/plot_raster.png)
+<img src='images/plot_raster.png' width='500px'></img>
 ### Estimate mean spike rate for different trial types
 * In this task, we plot first cell in __ephysDataset__ using precomputed psth
 ```matlab
@@ -121,7 +121,7 @@ xlabel('Time (s)')
 ylabel('Spikes per s')
 hold off
 ```
-![PSTH](images/plot_PSTH.png)
+<img src='images/plot_PSTH.png' width='500px'></img>
 * Extra - test for stationarity of sr across time in the session
 ### Compute selectivity
 * selectivity is defined as sr(R) - sr(L)
@@ -133,7 +133,7 @@ meanR - meanL
 ```matlab
 plot_PSTH_with_selectivity
 ```
-![Selectivity](images/plot_contra_selectivity.png)
+<img src='images/plot_contra_selectivity.png' width='500px'></img>
 ### Extra - Fano Factors
 ```matlab
 plot_ff
@@ -147,7 +147,7 @@ meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
 varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
 FF_R  = varR./meanR;
 ```
-![Fano factor](images/plot_ff.png)
+<img src='images/plot_ff.png' width='500px'></img>
 * Extra - does Fano Factor increase or decrease during the delay epoch? Compare Sample epoch, Early Delay and Late Delay
 ### Error trial analysis — is activity similar or different?
 * Run analyses above using error trials.
@@ -160,9 +160,11 @@ plot_session_PSTH_with_selectivity
 ### Grand average --  spike rate (sr)
 * Tips: using __for__ loop to compute sr(R) and sr(L) for correct trials in lick-right and left conditions for each cell
 * Tips: average across cells in each condition
-![session PSTH](images/plot_session_PSTH.png)
+
+<img src='images/plot_session_PSTH.png' width='500px'></img>
 ### Grand average selectivity, sr(L) - sr(R) (correct trials only)
-![session Selectivity](images/plot_session_contra_selectivity.png)
+
+<img src='images/plot_session_contra_selectivity.png' width='500px'></img>
 ### Grand average, abs(sr(R) - sr(L))
 
 
@@ -181,13 +183,16 @@ plot_CD_sim
 ```
 
 * Explore correlation of coding direction across time
-![](images/plot_coding_direction_correlation.png)
+
+<img src='images/plot_coding_direction_correlation.png' width='500px'></img>
 
 * Explore neural activity projected to coding direction
-![](images/plot_neural_activity_project_to_coding_direction.png)
+
+<img src='images/plot_neural_activity_project_to_coding_direction.png' width='500px'></img>
 
 * Do SVD; use Gram-Schmitt procedure to rotate the space to be orthogonal to CD using function __func_orthrog_vectors__
-![](images/plot_neural_activity_project_to_other_direction.png)
+
+<img src='images/plot_neural_activity_project_to_other_direction.png' width='500px'></img>
 
 * Related reference: Nuo Li, Kayvon Daie,	Karel Svoboda	& Shaul Druckmann (Nature, 2016) http://www.nature.com/nature/journal/v532/n7600/full/nature17643.html
 
@@ -198,6 +203,6 @@ plot_CD_sim
 ```matlab
 plot_dpca
 ```
-![DPCA](images/plot_dpca.png)
+<img src='images/plot_dpca.png' width='500px'></img>
 
 * Related reference: D Kobak, W Brendel, C Constantinidis, CE Feierstein, A Kepecs, ZF Mainen, X-L Qi, R Romo, N Uchida, CK Machens (eLife 2016) https://elifesciences.org/content/5/e10989
