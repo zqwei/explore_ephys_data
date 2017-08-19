@@ -10,7 +10,7 @@ The goal of this lecture is to analyze extracellular electrophysiology data acqu
 ### Task description:
 This is an extracellular electrophysiology data recorded during "Tactile delayed response task" in left premotor cortex of mice.
 Recordings were made with 64ch silicon probe.
-* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left (ipsi) or right (contra)).
+* A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right). Because recordings were made from left hemisphere, left and right are referred to as ipsi and contra directions.
 * The sample epoch was followed by a "delay epoch", while the animal keeps memory of future licking direction.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
 * When the animal licks the correct direction it receives water reward (correct trials). When it licks the wrong direction, there is no reward (error trials). 
