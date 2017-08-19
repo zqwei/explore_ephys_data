@@ -1,15 +1,15 @@
 # explore ephys data
 This is repo for the hand-on lecture on 08/21.
 The goal of this lecture is to analyze extracellular electrophysiology data acquired during motor-planning task by using Matlab.
-* See "Dataset Description" for description of the behavioral task and data.
-* See "Access data" for codes to load and access data
+* See "Dataset Description" for descriptions of the behavioral task and data.
+* See "Access data" for codes to load and access data.
 * See rest of the sections for analysis to perform.
 
 
 ## Dataset Description
 ### Task description:
-This is an extracellular electrophysiology data recording during "Tactile delayed response task" left in premotor cortex of mice.
-Recordings were made with 
+This is an extracellular electrophysiology data recorded during "Tactile delayed response task" in left premotor cortex of mice.
+Recordings were made with 64ch silicon probe.
 * A pole is presented to whiskers of an animal during a "sample epoch". The location of pole instructs the animal which direction to lick (left or right).
 * The sample epoch was followed by a "delay epoch", while the animal keep memory of future licking direction.
 * At the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
