@@ -25,26 +25,26 @@ The data set was acquired in mice performing a "tactile delayed response task". 
 * Response   :  0.0 to  2.0 sec.
 
 ### Data structure:
-Here we have data from 5 recording sessions. In each session, we have hundreds of behavioral trials with different trial types. In each recording session, we have multiple units (neurons) recorded simultaneously.
+This repo contains data from 5 recording sessions. Each session contains hundreds of behavioral trials with different trial types. Multiple units (neurons) were recorded simultaneously. We did not provide the raw extracellular waveforms, but only  'sorted' spikes. The process (some would say dark art) of 'spike sorting' is beyond the scope of this tutorial.  
 
-* Spiking data is stored in an structure array named __ephysDataset__
-* sessionIndex: index of the session in which neuron was recorded.  
+* Spikes are stored in a structure array named __ephysDataset__
+* sessionIndex: index of the session in which each neuron was recorded.  
 * nUnit       : index of the neuron(unit) in each recording session.
-* unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned by 67 ms discretely in time.
-* unit_no_trial : spike rates in correct left-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_trial : spike rates in correct left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
-* unit_yes_trial_spk_time: timing of each spike in correct right-lick trials (sec).
-* unit_no_trial_spk_time : timing of each spike in correct left-lick trials (sec).
+* unit_yes_trial_spk_time: time of each spike in correct right-lick trials (sec).
+* unit_no_trial_spk_time : time of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: spike rates in error right-lick trial. Spikes were binned by 67 ms discretely in time.
-* unit_no_error : spike rates in error left-lick trial. Spikes were binned by 67 ms discretely in time.
+* unit_yes_error: spike rates in error right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_error : spike rates in error left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_error_index: trial index of each error right-lick trial.
 * unit_no_error_index : trial index of each error left-lick trial.
-* unit_yes_error_spk_time: timing of each spike in error right-lick trials (unit in sec).
-* unit_no_error_spk_time : timing of each spike in error left-lick trials (unit in sec).
+* unit_yes_error_spk_time: time of each spike in error right-lick trials (unit in sec).
+* unit_no_error_spk_time : time of each spike in error left-lick trials (unit in sec).
 
-* depth_in_um: recording depth of the unit in um. We don't use this info int this lecture.
+* depth_in_um: recording depth of the unit in um. We don't use this info here.
 * cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
 * __timetag__    : timing of each bin (67 ms discrete time bins).
 * __simDataset__ : Dataset for "Dimensionality reduction". See "Dimensionality reduction" for detail. 
@@ -74,7 +74,7 @@ psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 ##### Extra
 * Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
-#### Get timing of each bins for the spike counts
+#### Get timing of each bin for the spike counts
 ```matlab
 timetag;
 ```
