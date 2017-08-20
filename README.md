@@ -30,15 +30,15 @@ This repo contains data from 5 recording sessions. Each session contains hundred
 * Spikes are stored in a structure array named __ephysDataset__. The data set has 125 units, each with its own structure. 
 * sessionIndex: index of the session in which each neuron was recorded. For example, the first 26 units all derive from session 1.  
 * nUnit       : index of the neuron(unit) in each recording session. nUnit for the first 26 units runs from 1-26, and then resets to 1 for the first unity of session 2, etc.
-* unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_trial : spike rates in correct left-lick trial. Spikes were binned into 67 ms bins.
+* unit_yes_trial: spike rate in correct right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_trial : spike rate in correct left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
 * unit_yes_trial_spk_time: time of each spike in correct right-lick trials (sec).
 * unit_no_trial_spk_time : time of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: spike rates in error right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_error : spike rates in error left-lick trial. Spikes were binned into 67 ms bins.
+* unit_yes_error: spike rate in error right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_error : spike rate in error left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_error_index: trial index of each error right-lick trial.
 * unit_no_error_index : trial index of each error left-lick trial.
 * unit_yes_error_spk_time: time of each spike in error right-lick trials (unit in sec).
@@ -79,14 +79,14 @@ psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 timetag;
 ```
 
-#### Get spike time for a neuron in one of lick-right trials
+#### Get spike times for a neuron in one of the lick-right trials
 ```matlab
 cell_idx = 1; % cell at 1st row of the ephysDataset 
 nTrial = 2; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 ```
 ##### Extra
-* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions. 
 
 #### Run all analyses (see code tasks as follow)
 ```matlab
