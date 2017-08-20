@@ -1,5 +1,6 @@
-% This is a script to plot mean PSTH and selectivity per session
-% We exclude fast spiking cell for this analysis
+% This script plots the grand average PSTH and selectivity (across units
+% and trials wtihin one session)
+% We exclude fast spiking cells for this analysis
 % ephysDataset.cell_type: cell type. 1 is regular spiking cell, 0 is fast
 % spiking cell
 %
@@ -16,17 +17,17 @@ load('ephysDataset.mat') % laod data
 %% find the regular spiking units from the session
 % sessionIndex should be the assigned sessionId & cell_type needs to be 1 (regular spiking cell)
 sessionData = ephysDataset([ephysDataset.sessionIndex]==sessionId & [ephysDataset.cell_type]==1);
-numUnit     = length(sessionData); % number of unit
-numTime     = length(timeTag);     % number of time bin
+numUnit     = length(sessionData); % number of units
+numTime     = length(timeTag);     % number of time bins
 
 
 %% Calculate the mean spike rate of each unit
-% predefine matrix
+% predefine matrix of nan's (i.e. 'not a number')_
 meanR = nan(numUnit, numTime);
 meanL = nan(numUnit, numTime);
 selectivity = nan(numUnit, numTime);
 
-% run loop to extract data from each unit
+% run a loop to extract data from each unit
 for cellID = 1:numUnit
 
     % calcualte mean PSTH of each unit
@@ -35,7 +36,7 @@ for cellID = 1:numUnit
     
     % calculate selectivity of each cell
     % Only cells with siginificant selectivity during the delay epoch is included 
-    % negative selectivityt during the delay epoch is flipped to be positive 
+    % negative selectivity during the delay epoch is flipped to be positive 
         
     % extarct spike rate during the delay epoch
     delayTimbin = timeTag>-1.3 & timeTag<0; % timbin of delay epoch

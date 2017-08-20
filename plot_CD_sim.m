@@ -1,7 +1,6 @@
-% plot fano factor 
 % 
-% This code will go through coding direction plot for a selected single
-% session for two behavioral conditions.
+% This code will compute the coding direction for a selected session and 
+% plot the projection to the coding direction .
 %
 % 
 %
@@ -22,7 +21,8 @@ meanMatR = squeeze(mean(simDataset.unit_yes_trial,1));
 % mean spike rate of each neuron at each time bin. Mean was caluclated over
 % trials. Then squeezed to be 2 dimensional.
 meanMatL = squeeze(mean(simDataset.unit_no_trial,1));
-cdMat    = meanMatR - meanMatL;
+cdMat    = meanMatR - meanMatL; % note: this is the simplest way of computing the CD, but it has 
+                                % some issues
 
 figure;
 title('Coding direction correlation across time for Simultaneous Session')

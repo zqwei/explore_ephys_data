@@ -1,4 +1,4 @@
-% This is a script to plot PSTH and selectivity of individual cell
+    % This is a script to plot PSTH and selectivity of individual cell
 % 
 % cellId: determines which cell to plot
 %

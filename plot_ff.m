@@ -1,7 +1,9 @@
-% plot fano factor 
+% Compute a plot fano factor as a function of time. Use the binned data
+% in unit_yes_trial etc. The FF is variance over mean for some time bin
+% (here 
 % 
-% This code will go through fano factor plot for a selected single neuron at
-% for each behavioral conditions.
+% This code will compute the fano factor for a selected single neuron and 
+% for each behavioral condition.
 %
 % blue: lick right
 % red: lick left
@@ -15,11 +17,11 @@ load('ephysDataset.mat')
 sampleRate = 14.84;
 cellId = 1;
 
-% fano factor is computed as the variance of spike counts across trial over 
+% Fano factor is computed as the variance of spike counts across trial over 
 % its mean across trial
 
-% one would transfer the spike rate in our dataset to spike count by sample
-% rate
+% Divide spike rate by sample rate to get spike count;
+% Divide variance of spike rate by sample rate squared to get variance of spike count 
 meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
 meanL = mean(ephysDataset(cellId).unit_no_trial,1)/sampleRate;
 varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
