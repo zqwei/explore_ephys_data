@@ -9,7 +9,7 @@ The goal is to analyze extracellular electrophysiology data acquired in a delaye
 
 ## Dataset Description
 ### Task description:
-The data set was acquired in mice performing a "tactile delayed response task". Recordings were made in the premotor cortex using 64ch silicon probes (for more information see Guo, Z, Li, N et al 2014 Neuron; Li, N, Daie, K et al 2016 Nature).
+The data set was acquired in mice performing a "tactile delayed response task". Recordings were made in the premotor cortex using 64ch silicon probes (for more information see Guo, Z, Li, N et al 2014 Neuron; Li, N, Daie, K et al 2016 Nature; included in the repository).
 * An object was presented to the whiskers during a "sample epoch". The location of the object instructs the animal which direction to lick (left or right). Because recordings were in left hemisphere, left and right are referred to as ipsi and contra directions.
 * The sample epoch was followed by a "delay epoch", during which the mouse has to maintain a memory of future licking direction.
 * At the end of the delay epoch, and signaling the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
@@ -27,18 +27,18 @@ The data set was acquired in mice performing a "tactile delayed response task". 
 ### Data structure:
 This repo contains data from 5 recording sessions. Each session contains hundreds of behavioral trials with different trial types. Multiple units (neurons) were recorded simultaneously. We did not provide the raw extracellular waveforms, but only  'sorted' spikes. The process (some would say dark art) of 'spike sorting' is beyond the scope of this tutorial.  
 
-* Spikes are stored in a structure array named __ephysDataset__
-* sessionIndex: index of the session in which each neuron was recorded.  
-* nUnit       : index of the neuron(unit) in each recording session.
-* unit_yes_trial: spike rates in correct right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_trial : spike rates in correct left-lick trial. Spikes were binned into 67 ms bins.
+* Spikes are stored in a structure array named __ephysDataset__. The data set has 125 units, each with its own structure. 
+* sessionIndex: index of the session in which each neuron was recorded. For example, the first 26 units all derive from session 1.  
+* nUnit       : index of the neuron(unit) in each recording session. nUnit for the first 26 units runs from 1-26, and then resets to 1 for the first unity of session 2, etc.
+* unit_yes_trial: spike rate in correct right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_trial : spike rate in correct left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_trial_index: trial index of each correct right-lick trial.
 * unit_no_trial_index : trial index of each correct left-lick trial.
 * unit_yes_trial_spk_time: time of each spike in correct right-lick trials (sec).
 * unit_no_trial_spk_time : time of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: spike rates in error right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_error : spike rates in error left-lick trial. Spikes were binned into 67 ms bins.
+* unit_yes_error: spike rate in error right-lick trial. Spikes were binned into 67 ms bins.
+* unit_no_error : spike rate in error left-lick trial. Spikes were binned into 67 ms bins.
 * unit_yes_error_index: trial index of each error right-lick trial.
 * unit_no_error_index : trial index of each error left-lick trial.
 * unit_yes_error_spk_time: time of each spike in error right-lick trials (unit in sec).
@@ -79,14 +79,14 @@ psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 timetag;
 ```
 
-#### Get spike time for a neuron in one of lick-right trials
+#### Get spike times for a neuron in one of the lick-right trials
 ```matlab
 cell_idx = 1; % cell at 1st row of the ephysDataset 
 nTrial = 2; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 ```
 ##### Extra
-* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions. 
 
 #### Run all analyses (see code tasks as follow)
 ```matlab
