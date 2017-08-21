@@ -44,7 +44,7 @@ cdProjR    = meanMatR' * cdDelay;  % projecton of lickR trial activity to CD
 cdProjL    = meanMatL' * cdDelay;
 
 figure;
-title('Coding direction projection for Simultaneous Session')
+title('Coding direction projection (one session)')
 hold on
 plot(timeTag, cdProjR, '-b')
 plot(timeTag, cdProjL, '-r')
@@ -57,7 +57,7 @@ hold off
 
 %% find the second biggest mode
 
-% acquire spike rate at pre sample peoch to subtract baseline spike rate
+% acquire spike rate at pre sample epoch to subtract baseline spike rate
 sample_start = -2.6;
 preR = mean(simDataset.unit_yes_trial(:,:,timeTag<sample_start),3);  
 preL = mean(simDataset.unit_no_trial(:,:,timeTag<sample_start),3);   
@@ -77,19 +77,19 @@ rdDelay = mean(rdMat(:, timeToAnalyze), 2); % average SVD mode during the last 4
 [orth_Delay,along] = func_orthrog_vectors(cdDelay,rdDelay); % rotatet the mode to CD
 orth_Delay = orth_Delay/norm(orth_Delay); % normalize it
 
-%% projection of data to remainant direction
+%% projection of data to second mode 
 odProjR    = meanMatR' * orth_Delay;
 odProjL    = meanMatL' * orth_Delay;
 
 figure;
-title('Remainant direction projection for Simultaneous Session')
+title('Projection to second mode, orthogonal to CD (one session)')
 hold on
 plot(timeTag, odProjR, '-b')
 plot(timeTag, odProjL, '-r')
 gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
 xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
-ylabel('Activity projected orthogonal direction')
+ylabel('Activity projected to 2. mode')
 hold off   
             
             
@@ -118,7 +118,7 @@ plot(timeTag, varCdL./varL,'r')
 gridxy([-2.6 -1.3 0],'Color','k','Linestyle','--') ;
 xlim([-3.0  1.5]);
 xlabel('Time from movement (sec)')
-ylabel('Variance explained by coding direction')
+ylabel('Variance explained by second mode')
 subplot(2,1,2)
 hold on
 plot(timeTag, varOdR./varR,'b')
