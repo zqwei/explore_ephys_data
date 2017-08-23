@@ -33,7 +33,7 @@ end
 
 unit_no_trial_spk_time = ephysDataset(cellId).unit_no_trial_spk_time;
 
-for ntrial = 1:length(unit_yes_trial_spk_time)
+for ntrial = 1:length(unit_no_trial_spk_time)
     spkTime = unit_no_trial_spk_time{ntrial};
     numTrial = numTrial + 1;
     plot(spkTime, numTrial * ones(length(spkTime), 1), '.r');
