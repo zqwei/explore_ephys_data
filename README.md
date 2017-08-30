@@ -1,6 +1,6 @@
 # Exploring extracellular electrophysiology data
-This repo if for the JHU Neuroscience bootcamp, day 1, extrecellular neurophysiology (08/21, 2017).
-The goal is to analyze extracellular electrophysiology data acquired in a delayed reponse task. This set of exercises is in Matlab. 
+This repo is for the JHU Neuroscience bootcamp, day 1, extracellular neurophysiology (08/21, 2017).
+The goal is to analyze extracellular electrophysiology data acquired in a delayed-response task. This set of exercises is for Matlab.
 * See "Dataset description" for the structure of the data, including behavior and electrophysiology.
 * See "Data access" for code to load and manipulate data.
 * The remainder of the sections if about the analyses to be performed.
@@ -10,11 +10,11 @@ The goal is to analyze extracellular electrophysiology data acquired in a delaye
 ## Dataset Description
 ### Task description:
 The data set was acquired in mice performing a "tactile delayed response task". Recordings were made in the premotor cortex using 64ch silicon probes (for more information see Guo, Z, Li, N et al 2014 Neuron; Li, N, Daie, K et al 2016 Nature; included in the repository).
-* An object was presented to the whiskers during a "sample epoch". The location of the object instructs the animal which direction to lick (left or right). Because recordings were in left hemisphere, left and right are referred to as ipsi and contra directions.
+* An object was presented to the whiskers during a "sample epoch". The location of the object instructs the animal which direction to move (lick left or lick right). Because recordings were made in the left hemisphere, left and right are referred to as ipsi and contra directions.
 * The sample epoch was followed by a "delay epoch", during which the mouse has to maintain a memory of future licking direction.
 * At the end of the delay epoch, and signaling the beginning of a "response poch", a brief "go cue" (100ms)instructs the animal to move.
-* When the animal licks in the correct direction it receives water reward (correct trials). Licking in the wrong direction results in reward omission (error trials). 
-* Neurons in premotor cortex show preparatory activity during the delay epoch. Preparatory activity is the neural correlate of motor planning. Preparatory activity corellates with movements, sometimes long before the movements occurr. Let's analyze preparatory activity both at the single neuron and population level.
+* When the animal licks in the correct direction it receives water reward (correct trials). Licking in the wrong direction results in reward omission (error trials).
+* Neurons in premotor cortex show preparatory activity during the delay epoch. Preparatory activity is the neural correlate of motor planning. Preparatory activity correlates with movements, sometimes long before the movements occur. Let's analyze preparatory activity both at the single neuron and population level.
 
 ![task](images/task.png)
 
@@ -27,27 +27,27 @@ The data set was acquired in mice performing a "tactile delayed response task". 
 ### Data structure:
 This repo contains data from 5 recording sessions. Each session contains hundreds of behavioral trials with different trial types. Multiple units (neurons) were recorded simultaneously. We did not provide the raw extracellular waveforms, but only  'sorted' spikes. The process (some would say dark art) of 'spike sorting' is beyond the scope of this tutorial.  
 
-* Spikes are stored in a structure array named __ephysDataset__. The data set has 125 units, each with its own structure. 
+* Spikes are stored in a structure array named __ephysDataset__. The data set has 125 units, each with its own structure.
 * sessionIndex: index of the session in which each neuron was recorded. For example, the first 26 units all derive from session 1.  
 * nUnit       : index of the neuron(unit) in each recording session. nUnit for the first 26 units runs from 1-26, and then resets to 1 for the first unity of session 2, etc.
-* unit_yes_trial: spike rate in correct right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_trial : spike rate in correct left-lick trial. Spikes were binned into 67 ms bins.
-* unit_yes_trial_index: trial index of each correct right-lick trial.
-* unit_no_trial_index : trial index of each correct left-lick trial.
-* unit_yes_trial_spk_time: time of each spike in correct right-lick trials (sec).
-* unit_no_trial_spk_time : time of each spike in correct left-lick trials (sec).
+* sr_right: spike rate in correct right-lick trial. Spikes were binned into 67 ms bins.
+* sr_left: spike rate in correct left-lick trial. Spikes were binned into 67 ms bins.
+* right_trial_index: trial index of each correct right-lick trial.
+* left_trial_index : trial index of each correct left-lick trial.
+* st_right: time of each spike in correct right-lick trials (sec).
+* st_left: time of each spike in correct left-lick trials (sec).
 
-* unit_yes_error: spike rate in error right-lick trial. Spikes were binned into 67 ms bins.
-* unit_no_error : spike rate in error left-lick trial. Spikes were binned into 67 ms bins.
-* unit_yes_error_index: trial index of each error right-lick trial.
-* unit_no_error_index : trial index of each error left-lick trial.
-* unit_yes_error_spk_time: time of each spike in error right-lick trials (unit in sec).
-* unit_no_error_spk_time : time of each spike in error left-lick trials (unit in sec).
+* sr_right_error: spike rate in error right-lick trial. Spikes were binned into 67 ms bins.
+* sr_left_error: spike rate in error left-lick trial. Spikes were binned into 67 ms bins.
+* right_trial_error_index: trial index of each error right-lick trial.
+* left_trial_error_index: trial index of each error left-lick trial.
+* st_right_error: time of each spike in error right-lick trials (unit in sec).
+* st_left_error: time of each spike in error left-lick trials (unit in sec).
 
 * depth_in_um: recording depth of the unit in um. We don't use this info here.
 * cell_type  : putative pyramidal cells -- 1; fast-spiking interneurons: 0.
 * __timetag__    : timing of each bin (67 ms discrete time bins).
-* __simDataset__ : Dataset for "Dimensionality reduction". See "Dimensionality reduction" for detail. 
+* __simDataset__ : Dataset for "Dimensionality reduction". See "Dimensionality reduction" for detail.
 
 ## Data access
 #### Load data file
@@ -67,7 +67,7 @@ load('ephysDataset.mat')
 
 #### Get spike counts for a neuron in one of lick-right trials
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset 
+cell_idx = 100; % cell at 100th row of the ephysDataset
 nTrial = 2; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 ```
@@ -81,12 +81,12 @@ timetag;
 
 #### Get spike times for a neuron in one of the lick-right trials
 ```matlab
-cell_idx = 1; % cell at 1st row of the ephysDataset 
+cell_idx = 1; % cell at 1st row of the ephysDataset
 nTrial = 2; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 ```
 ##### Extra
-* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions. 
+* Try the code for another trial of the same cell in correct right-lick, correct left-lick, error right-lick, and error left-lick conditions.
 
 #### Run all analyses (see code tasks as follow)
 ```matlab
@@ -97,7 +97,7 @@ all_compiled;
 ### Plot rasters
 * Plot each spike in a single trial as a dot (see also __Data access__ for detail)
 ```matlab
-cell_idx = 100; % cell at 100th row of the ephysDataset 
+cell_idx = 100; % cell at 100th row of the ephysDataset
 nTrial = 10; % the second lick-right trial
 spkTime = ephysDataset(cell_idx).unit_yes_trial_spk_time{nTrial};
 figure;
@@ -111,15 +111,15 @@ plot_raster
 ```
 <img src='images/plot_raster.png' width='500px'></img>
 ### Estimate mean spike rate for different trial types
-* First we plot spike rates in a single trial of an example cell 
+* First we plot spike rates in a single trial of an example cell
 ```matlab
-cell_idx = 1; % cell at 1st row of the ephysDataset 
+cell_idx = 1; % cell at 1st row of the ephysDataset
 nTrial = 10; % the second lick-right trial
 psth = ephysDataset(cell_idx).unit_yes_trial(nTrial,:);
 figure;
 plot(timeTag, psth);
 ```
-* Extra - Create spike count 
+* Extra - Create spike count
 
 * Next, plot mean peri-stimulus histogram (PSTH): average spike rates among trials using _mean_ function.
 ```matlab
@@ -144,7 +144,7 @@ hold off
 meanR - meanL
 ```
 * Plot selectivity of each neuron and do statistical test (ranksum test comparing two trial types)
-* example code and result 
+* example code and result
 ```matlab
 plot_PSTH_with_selectivity
 ```
