@@ -12,8 +12,8 @@ cellId = 1; % cell to plot
 load('ephysDataset.mat') % load data
 
 %% Calculate the mean spike rate & selectivity
-meanR = mean(ephysDataset(cellId).unit_yes_trial,1); % mean PSTH of lick R trial
-meanL = mean(ephysDataset(cellId).unit_no_trial,1);  % mean PSTH of lick L trial
+meanR = mean(ephysDataset(cellId).sr_right,1); % mean PSTH of lick R trial
+meanL = mean(ephysDataset(cellId).sr_left,1);  % mean PSTH of lick L trial
 selectivity = meanR - meanL; % contra selectivity: difference in spike rate between two trial types (R - L)
 
 %% plot the PSTH
