@@ -22,10 +22,10 @@ cellId = 1;
 
 % Divide spike rate by sample rate to get spike count;
 % Divide variance of spike rate by sample rate squared to get variance of spike count 
-meanR = mean(ephysDataset(cellId).unit_yes_trial,1)/sampleRate;
-meanL = mean(ephysDataset(cellId).unit_no_trial,1)/sampleRate;
-varR  = var(ephysDataset(cellId).unit_yes_trial,1)/sampleRate^2;
-varL  = var(ephysDataset(cellId).unit_no_trial,1)/sampleRate^2;
+meanR = mean(ephysDataset(cellId).sr_right,1)/sampleRate;
+meanL = mean(ephysDataset(cellId).sr_left,1)/sampleRate;
+varR  = var(ephysDataset(cellId).sr_right,1)/sampleRate^2;
+varL  = var(ephysDataset(cellId).sr_left,1)/sampleRate^2;
 FF_R  = varR./meanR;
 FF_L  = varL./meanL;
 
