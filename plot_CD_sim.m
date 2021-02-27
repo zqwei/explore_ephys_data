@@ -17,10 +17,10 @@ numUnit = size(simDataset.unit_yes_trial,2); % number of unit
 numTime = length(timeTag); % number of time bin
 
 %% coding direction
-meanMatR = squeeze(mean(simDataset.unit_yes_trial,1)); 
+meanMatR = squeeze(mean(simDataset.sr_right,1)); 
 % mean spike rate of each neuron at each time bin. Mean was caluclated over
 % trials. Then squeezed to be 2 dimensional.
-meanMatL = squeeze(mean(simDataset.unit_no_trial,1));
+meanMatL = squeeze(mean(simDataset.sr_left,1));
 cdMat    = meanMatR - meanMatL; % note: this is the simplest way of computing the CD, but it has 
                                 % some issues
 
@@ -59,14 +59,14 @@ hold off
 
 % acquire spike rate at pre sample epoch to subtract baseline spike rate
 sample_start = -2.6;
-preR = mean(simDataset.unit_yes_trial(:,:,timeTag<sample_start),3);  
-preL = mean(simDataset.unit_no_trial(:,:,timeTag<sample_start),3);   
+preR = mean(simDataset.sr_right(:,:,timeTag<sample_start),3);  
+preL = mean(simDataset.sr_left(:,:,timeTag<sample_start),3);   
 baseline_matrix = [preR;preL];
 rdMat = nan(numUnit,numTime);
 
 % Do SVD at each time point
 for t = 1:numTime
-    data = [ squeeze(simDataset.unit_yes_trial(:,:,t)); squeeze(simDataset.unit_no_trial(:,:,t))]; % spike rate at each time point
+    data = [ squeeze(simDataset.sr_right(:,:,t)); squeeze(simDataset.sr_left(:,:,t))]; % spike rate at each time point
     data = data-baseline_matrix;
     [~,~,svd_v] = svd(data); % svd of spike rate 
     rdMat(:,t)=svd_v(:,1);   % extarct the first component
@@ -96,8 +96,8 @@ hold off
 %% variance explained
 
 % first calucalte the square sum of spike rate among all neurons
-srR = squeeze(mean(simDataset.unit_yes_trial,1));  
-srL = squeeze(mean(simDataset.unit_no_trial,1)); 
+srR = squeeze(mean(simDataset.sr_right,1));  
+srL = squeeze(mean(simDataset.sr_left,1)); 
 
 varR   = sum(srR.^2,1);
 varL   = sum(srL.^2,1);
