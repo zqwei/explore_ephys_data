@@ -31,8 +31,8 @@ selectivity = nan(numUnit, numTime);
 for cellID = 1:numUnit
 
     % calcualte mean PSTH of each unit
-    meanR(cellID,:) = mean(sessionData(cellID).unit_yes_trial,1);
-    meanL(cellID,:) = mean(sessionData(cellID).unit_no_trial,1);    
+    meanR(cellID,:) = mean(sessionData(cellID).sr_right,1);
+    meanL(cellID,:) = mean(sessionData(cellID).sr_left,1);    
     
     % calculate selectivity of each cell
     % Only cells with siginificant selectivity during the delay epoch is included 
@@ -40,8 +40,8 @@ for cellID = 1:numUnit
         
     % extarct spike rate during the delay epoch
     delayTimbin = timeTag>-1.3 & timeTag<0; % timbin of delay epoch
-    srDelayR    = mean(sessionData(cellID).unit_yes_trial(:,delayTimbin),2); % spike rate during delay lick R trial
-    srDelayL    = mean(sessionData(cellID).unit_no_trial(:,delayTimbin),2);  % spike rate during delay lick L trial
+    srDelayR    = mean(sessionData(cellID).sr_right(:,delayTimbin),2); % spike rate during delay lick R trial
+    srDelayL    = mean(sessionData(cellID).sr_left(:,delayTimbin),2);  % spike rate during delay lick L trial
     
     % ranksum test to check if spike rates are significantly different between two trial types
     p = ranksum(srDelayR,srDelayL);
