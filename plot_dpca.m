@@ -25,8 +25,8 @@ meanMatR = zeros(numUnit, numTime);
 meanMatL = zeros(numUnit, numTime);
 
 for cellId = 1:numUnit
-    meanR = mean(ephysDataset(cellId).unit_yes_trial,1);
-    meanL = mean(ephysDataset(cellId).unit_no_trial,1);
+    meanR = mean(ephysDataset(cellId).sr_right,1);
+    meanL = mean(ephysDataset(cellId).sr_left,1);
     meanMatR(cellId, :) = meanR;
     meanMatL(cellId, :) = meanL;
 end
