@@ -15,7 +15,7 @@ load('ephysDataset.mat')
 % cell number (ranged from 1 to length of datasets)
 cellId = 1;
 
-unit_yes_trial_spk_time = ephysDataset(cellId).unit_yes_trial_spk_time;
+st_right = ephysDataset(cellId).st_right;
 
 figure;
 
@@ -25,16 +25,16 @@ hold on;
 
 numTrial = 0;
 
-for ntrial = 1:length(unit_yes_trial_spk_time)
-    spkTime = unit_yes_trial_spk_time{ntrial};
+for ntrial = 1:length(st_right)
+    spkTime = st_right{ntrial};
     numTrial = numTrial + 1;
     plot(spkTime, numTrial * ones(length(spkTime), 1), '.b');
 end
 
-unit_no_trial_spk_time = ephysDataset(cellId).unit_no_trial_spk_time;
+st_left = ephysDataset(cellId).st_left;
 
-for ntrial = 1:length(unit_no_trial_spk_time)
-    spkTime = unit_no_trial_spk_time{ntrial};
+for ntrial = 1:length(st_left)
+    spkTime = st_left{ntrial};
     numTrial = numTrial + 1;
     plot(spkTime, numTrial * ones(length(spkTime), 1), '.r');
 end
